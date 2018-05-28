@@ -12,10 +12,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
+const staticAssetsPath = path.resolve(__dirname, 'dist');
+app.use(express.static(staticAssetsPath));
+
 require('./routes/questionRoutes')(app);
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '/public/index.html'));
+    res.sendFile(path.join(__dirname + '/dist/index.html'));
 })
 
 app.get('/wikiAPI', (req, res) => {
